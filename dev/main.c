@@ -28,7 +28,7 @@ typedef struct _actor {
 } actor;
 
 typedef struct _room {
-	unsigned char *map;
+	const unsigned char *map;
 	unsigned int base_fg_tile;
 	unsigned int base_bg_tile;
 	struct _room *top_exit;
@@ -41,9 +41,9 @@ int ply_frame_ctrl, ply_frame;
 int flicker_ctrl;
 room *curr_room;
 
-const unsigned int ply_frames[] = { 0, 4, 8, 4 };
-const unsigned int chalice_frames[] = { 0, 48, 96, 48 };
-const unsigned int no_frames[] = { 0 };
+unsigned int ply_frames[] = { 0, 4, 8, 4 };
+unsigned int chalice_frames[] = { 0, 48, 96, 48 };
+unsigned int no_frames[] = { 0 };
 
 void draw_ship(unsigned char x, unsigned char y, unsigned char base_tile) {
 	SMS_addSprite(x, y, base_tile);
@@ -105,14 +105,14 @@ void draw_actor_dragon(void *p) {
 	draw_dragon(act->x - 24, act->y - 24, act->class->base_tile);
 }
 
-const actor_class cube_class = { 2, 4, 6, 0, ply_frames, draw_actor_player };
-const actor_class green_dragon_class = { 14, 0, 0, 0, no_frames, draw_actor_dragon };
-const actor_class red_dragon_class = { 26, 0, 0, 0, no_frames, draw_actor_dragon };
-const actor_class yellow_dragon_class = { 38, 0, 0, 0, no_frames, draw_actor_dragon };
-const actor_class sword_class = { 26, 0, 0, 1, no_frames, draw_actor_player };
-const actor_class chalice_class = { 74, 4, 4, 1, chalice_frames, draw_actor_player };
-const actor_class yellow_key_class = { 78, 0, 0, 1, no_frames, draw_actor_player };
-const actor_class black_key_class = { 174, 0, 0, 1, no_frames, draw_actor_player };
+actor_class cube_class = { 2, 4, 6, 0, ply_frames, draw_actor_player };
+actor_class green_dragon_class = { 14, 0, 0, 0, no_frames, draw_actor_dragon };
+actor_class red_dragon_class = { 26, 0, 0, 0, no_frames, draw_actor_dragon };
+actor_class yellow_dragon_class = { 38, 0, 0, 0, no_frames, draw_actor_dragon };
+actor_class sword_class = { 26, 0, 0, 1, no_frames, draw_actor_player };
+actor_class chalice_class = { 74, 4, 4, 1, chalice_frames, draw_actor_player };
+actor_class yellow_key_class = { 78, 0, 0, 1, no_frames, draw_actor_player };
+actor_class black_key_class = { 174, 0, 0, 1, no_frames, draw_actor_player };
 
 room garden_center;
 room yellow_castle_interior;
@@ -202,7 +202,7 @@ actor *chalice_actor = actors + 5;
 actor *yellow_key_actor = actors + 6;
 actor *black_key_actor = actors + 7;
 
-unsigned char *row_pointers[12];
+const unsigned char *row_pointers[12];
 
 void init_actor(int id, int x, int y, char life, actor_class *class) {
 	actor *act = actors + id;
@@ -221,8 +221,9 @@ void init_actor(int id, int x, int y, char life, actor_class *class) {
 }
 
 // Right now, I'm too lazy to use a proper map editor.. :P
-void draw_room(unsigned char *map, unsigned int base_fg_tile, unsigned int base_bg_tile) {
-	unsigned char i, j, ch, *o = map, *line;
+void draw_room(const unsigned char *map, unsigned int base_fg_tile, unsigned int base_bg_tile) {
+	const unsigned char *o = map, *line;
+	unsigned char i, j, ch;
 	unsigned int tile;
 
 	SMS_setNextTileatXY(0, 0);
@@ -279,7 +280,8 @@ char can_move_delta(int dx, int dy) {
 }
 
 char room_has_char(unsigned char expected) {
-	unsigned char i, j, *o;
+	const unsigned char *o;
+	unsigned char i, j;
 
 	for (i = 0; i != 12; i++) {
 		o = row_pointers[i];
@@ -404,7 +406,7 @@ unsigned char try_moving_randomly(actor *act) {
 	return 1;
 }
 
-unsigned char check_exits(actor *act) {
+void check_exits(actor *act) {
 	// Exiting from the top
 	if (act->y < -8) {
 		act->y = 182;
@@ -468,9 +470,9 @@ void main(void) {
 	SMS_useFirstHalfTilesforSprites(1);
 	SMS_setSpriteMode(SPRITEMODE_TALL);
 
-	SMS_loadBGPalette(background_tiles_palette_bin);
-	SMS_loadSpritePalette(all_sprites_palette_bin);
-	SMS_loadPSGaidencompressedTiles(background_tiles_psgcompr, 256);
+	SMS_loadBGPalette((void *)background_tiles_palette_bin);
+	SMS_loadSpritePalette((void *)all_sprites_palette_bin);
+	SMS_loadPSGaidencompressedTiles((const void *)background_tiles_psgcompr, 256);
 	SMS_loadPSGaidencompressedTiles(all_sprites_tiles_psgcompr, 2);
 	SMS_setClippingWindow(0, 0, 255, 192);
 	SMS_displayOn();
