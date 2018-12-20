@@ -1,4 +1,5 @@
 #include "main.h"
+//#pragma disable_warning 110
 
 #define MAX_ACTORS 8
 
@@ -364,7 +365,7 @@ unsigned char try_moving_away(actor *act, actor *target) {
 	return 1;
 }
 
-unsigned char try_moving_randomly(actor *act) {
+unsigned char try_moving_randomly(volatile actor *act) {
 	if (rand() & 0x1FF) {
 		return 0;
 	}
@@ -440,7 +441,7 @@ void check_exits(actor *act) {
 	}
 }
 
-green_dragon_ai() {
+void green_dragon_ai() {
 	try_moving_away(green_dragon_actor, sword_actor) ||
 		try_moving_towards(green_dragon_actor, ply_actor) ||
 		try_moving_towards(green_dragon_actor, chalice_actor) ||
@@ -451,7 +452,7 @@ green_dragon_ai() {
 	check_exits(green_dragon_actor);
 }
 
-yellow_dragon_ai() {
+void yellow_dragon_ai() {
 	try_moving_away(yellow_dragon_actor, sword_actor) ||
 		try_moving_away(yellow_dragon_actor, yellow_key_actor) ||
 		try_moving_towards(yellow_dragon_actor, ply_actor) ||
