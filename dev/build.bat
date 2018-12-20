@@ -22,7 +22,7 @@ del *.lk > nul
 del *.lst > nul
 del *.map > nul
 del *.noi > nul
-del *.rel > nul
+del main.rel > nul
 del *.sym > nul
 
 E:\Fusion\fusion.exe output.sms

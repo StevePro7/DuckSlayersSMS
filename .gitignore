@@ -54,6 +54,7 @@ dkms.conf
 # Additional
 *.db
 *.opendb
+*.rel
 
 bin/*
 obj/*
