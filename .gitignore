@@ -50,3 +50,14 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Additional
+*.db
+*.opendb
+
+bin/*
+obj/*
+dev/Debug/*
+dev/Game.suo
+dev/Game.vcproj.*
+dev/Game.ncb
