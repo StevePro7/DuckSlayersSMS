@@ -59,7 +59,9 @@ dkms.conf
 asm/*
 bin/*
 obj/*
+dev/*.vs
 dev/Debug/*
 dev/Game.suo
 dev/Game.vcproj.*
+dev/Game.vcxproj.*
 dev/Game.ncb
