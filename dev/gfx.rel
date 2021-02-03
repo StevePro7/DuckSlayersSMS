@@ -1,27 +1,45 @@
 XL2
-H 9 areas 13 global symbols
+H 9 areas 25 global symbols
 M gfx
 O -mz80
 S .__.ABS. Def0000
 A _CODE size 1E83 flags 0 addr 0
+S G$garden_right_txt$0$0 Def16DF
 S _black_castle_interior_txt Def1153
+S G$green_dragon_lair_txt$0$0 Def17B9
 S _background_tiles_psgcompr Def0E91
 S _all_sprites_tiles_psgcompr Def0010
 S _garden_right_txt Def16DF
+S G$garden_left_txt$0$0 Def1605
+S G$labyrinth_entrance_txt$0$0 Def196B
 S _green_dragon_lair_txt Def17B9
+S G$yellow_castle_front_txt$0$0 Def1CD3
+S G$labyrinth_top_txt$0$0 Def1BF9
+S G$labyrinth_bottom_txt$0$0 Def1891
+S G$yellow_castle_interior_txt$0$0 Def1DAB
+S G$background_tiles_palette_bin$0$0 Def0E84
 S _garden_left_txt Def1605
 S _labyrinth_entrance_txt Def196B
+S G$all_sprites_palette_bin$0$0 Def0000
 S _labyrinth_top_txt Def1BF9
 S _yellow_castle_front_txt Def1CD3
 S _labyrinth_bottom_txt Def1891
 S _yellow_castle_interior_txt Def1DAB
+S G$garden_center_txt$0$0 Def152B
 S _background_tiles_palette_bin Def0E84
 S _all_sprites_palette_bin Def0000
+S G$labyrinth_left_txt$0$0 Def1A45
+S G$labyrinth_middle_txt$0$0 Def1B1F
 S _garden_center_txt Def152B
+S G$font_fnt$0$0 Def122B
+S G$black_castle_front_txt$0$0 Def107B
+S G$black_castle_interior_txt$0$0 Def1153
 S _labyrinth_left_txt Def1A45
 S _labyrinth_middle_txt Def1B1F
+S G$background_tiles_psgcompr$0$0 Def0E91
 S _font_fnt Def122B
 S _black_castle_front_txt Def107B
+S G$all_sprites_tiles_psgcompr$0$0 Def0010
 A _DATA size 0 flags 0 addr 0
 A _INITIALIZED size 0 flags 0 addr 0
 A _DABS size 0 flags 8 addr 0
