@@ -10,10 +10,10 @@ sdcc -o output.ihx -mz80 --data-loc 0xC000 --no-std-crt0 ..\crt0\crt0_sms.rel ma
 ihx2sms output.ihx output.sms
 
 
-copy output.sms ..\asm
-cd ..\asm
-smsexamine.exe output.sms
-cd ..\dev
+::copy output.sms ..\asm
+::cd ..\asm
+::smsexamine.exe output.sms
+::cd ..\dev
 
 
 del *.asm > nul
